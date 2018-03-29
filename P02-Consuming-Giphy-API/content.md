@@ -152,6 +152,70 @@ This says that when someone hits our root route, `/`, we'll _render_ a file call
 <p>Welcome to {{title}}</p>
 ```
 
+Notice the double-brace notation (`{{...}}`)–that's _Handlebars_. Here, Handlebars expects a variable called `title`, which we assign in our `routes/index.js`. Go back to that file, and in `res.render()`, let's change the title to something other than `'Express'`, like `'Make School Giphy'`:
+
+```Javascript
+res.render('index', { title: 'Make School Giphy' });
+```
+
+Then, if you refresh `localhost:3000` in your browser, you should see this:
+
+![Make School Giphy Home Page](assets/ms_giphy_home.png)
+
+Now that we can control what appears on our home page from the back end, let's display our .gif.
+
+>[action]
+>
+Update `views/index.hbs` to look like the following:
+>
+```HTML
+<h1>{{title}}</h1>
+<p>
+  <img src="{{imgUrl}}" />
+</p>
+```
+>
+Here, we're adding an `img` tag onto the page, but instead of a URL we have Handlebars tag that renders a variable `imgUrl`. Just like our `title` variable, we need to give it a value in `routes/index.js`.
+
+>[action]
+>
+Open `routes/index.js`, and update the `res.render()` line to include a value for `imgUrl`:
+>
+```Javascript
+const express = require('express');
+const router = express.Router();
+const request = require('request');
+>
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  const url = "http://api.giphy.com/v1/gifs/random?api_key=YOUR-API-KEY";
+  request.get(url, (err, response, body) => {
+    if(err) { console.error(err) }
+>
+    body = JSON.parse(body);
+>
+    // Add this line to get the .gif's URL from the Giphy response body:
+    const imgUrl = body.data.source_image_url
+>
+    // And pass it to our view as imgUrl:
+    res.render('index', { title: 'Make School Giphy', imgUrl: imgUrl });
+  });
+});
+>
+module.exports = router;
+```
+
+Now refresh 'localhost:3000' again, and you should see a random .gif:
+
+![Make School Giphy First .gif](assets/ms_giphy_first_gif.png)
+
+If you see a broken image icon instead of a .gif, try refreshing the page–our app is still very simple and lacks error handling, and some .gifs only work in specific situations.
+
+![Make School Giphy Broken Image](assets/ms_giphy_broken.png)
+
+## Add CSS
+
+One last step before we finish our _MVP_, let's add some styling. We won't spend a lot of time making our app beautiful, but it's easy to make it look pretty good really fast. [Bootstrap](https://getbootstrap.com/) is a popular front end framework, and it's very easy to set up in three steps: First, we'll include Bootstrap in our project; Second, we'll add some Bootstrap classes to our HTML; Third, we'll add some custom CSS.
 
 
 # Giphy Search
