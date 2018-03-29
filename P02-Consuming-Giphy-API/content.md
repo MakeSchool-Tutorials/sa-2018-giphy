@@ -137,6 +137,21 @@ If you see `{ message: 'Invalid authentication credentials' }` instead, check yo
 
 ## Load result into view
 
+At this point, when we visit the home page of our app we don't see anything interesting–but on the back end, we're making a call to the Giphy API and getting a random .gif. Let's display that back end work on a page.
+
+Take another look at `routes/index.js`, especially the `res.render()` line:
+
+```Javascript
+res.render('index', { title: 'Express' });
+```
+
+This says that when someone hits our root route, `/`, we'll _render_ a file called `'index'`. That file happens to be located at `views/index.hbs`, so let's look at that file:
+
+```HTML
+<h1>{{title}}</h1>
+<p>Welcome to {{title}}</p>
+```
+
 
 
 # Giphy Search
