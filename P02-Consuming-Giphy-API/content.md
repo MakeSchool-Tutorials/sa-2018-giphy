@@ -36,6 +36,13 @@ express --hbs ms-giphy
 
 There should be a new `ms-giphy` folder–you can type `ls` to see the contents of your current directory. Let's open that folder by typing `cd ms-giphy`.
 
+>[action]
+>
+Inside the `ms-giphy` folder, tell NPM to install the packages our app needs by running
+>
+```
+NPM install
+```
 
 ## Add Extra Packages
 
@@ -55,16 +62,81 @@ Now we're ready to build an app that calls the Giphy API.
 
 # Getting a Random GIF
 
-<!-- TODO -->
+Our first goal is to build an _MVP_–a _Minimum Viable Product_, or the simplest possible version of our app. In this case, our _MVP_ will be a single call to Giphy's random API endpoint, and a simple web page that displays the .gif it returns. Let's start by building the API call.
 
 ## Use Request to Call Giphy Random API
+
+Let's open the `ms-giphy` directory in your text editor. You should have these files:
+
+![file tree](assets/file_tree.png)
+
+Open `routes/index.js`, and you should see the following code:
+
+```Javascript
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
+module.exports = router;
+```
+
+Express has defined one route for us already at `/`, which is the root route of our web site-when somebody visits `www.my-awesome-site.com` (or `localhost:3000`, as we'll do in a moment), this is the function we'll call. At the moment, all it does is return a file called `index` with a title "Express"–we'll see what all this means in the next section. For now, let's set this function up to use Request
+
+>[action]
+>
+..
+>
+```Javascript
+const express = require('express');
+const router = express.Router();
+>
+// Add this line
+const request = require('request');
+>
+/* GET home page. */
+router.get('/', function(req, res, next) {
+>
+  // Add the following 5 lines (be sure to add _your_ API key to the URL)
+  const url = "http://api.giphy.com/v1/gifs/random?api_key=YOUR-API-KEY";
+  request.get(url, (err, response, body) => {
+    if(err) { console.error(err) }
+>
+    body = JSON.parse(body);
+    console.log(body);
+>
+    res.render('index', { title: 'Express' });
+  });
+});
+>
+module.exports = router;
+```
+>
+First, we are requiring Request and assigning it to the variable `request`–now we can access all of Request's functionality through that variable.
+>
+Next, we save the Giphy API Random Endpoint URL as a variable–this isn't totally necessary, but it makes it look a little nicer on the next line when we have to pass it in to `.get()` as an argument. Also, be sure to replace `YOUR-API-KEY` with _your API key_–otherwise you'll just get `422` errors instead of gifs.
+>
+Finally, we parse the `body` to convert it from a JSON string to a Javascript object, and log that to the console. (Here, `console.log()` will print messages in your terminal because this code runs on the server; if you run `console.log()` from inside a browser, it will print to your browser console.)
+
+Let's try it out: in your terminal, make sure you're in your `ms-giphy` folder and type:
+
+```
+nodemon start
+```
+
+If you don't see an error message, open your browser and visit `localhost:3000`. You should see the default Express home page, something like this:
+
+![Express Default Home Page](assets/express_home.png)
+
+This is because we haven't set this page up yet–we'll do that next. But if you look at the terminal, you should see a couple of `GET` request logs and a rather large object with keys like `slug`, `url`, `bitly-url`, etc... If so, we're ready to display that result on a web page.
+
+If you see `{ message: 'Invalid authentication credentials' }` instead, check your API key in the URL.
 
 ## Load result into view
 
 
 
 # Giphy Search
-
-After the core content, summarize what student should know now. Also link to the solution repository.
-
-Finish the tutorial by providing links and resources for the student to dive deeper into the subject.
