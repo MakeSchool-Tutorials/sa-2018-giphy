@@ -11,17 +11,24 @@ The first section of the tutorial should summarize what the student will learn a
 
 Do not create a feedback section linking to the tutorial content repo. This is now done automatically!
 
-# Postman
-
-<!-- TODO -->
-
 # JSON
 
-<!-- TODO -->
+<!-- TODO: copy Dion -->
+
+# Postman
+
+<!-- TODO: introduction -->
+<!-- TODO: install -->
 
 # Some public APIs
 
 <!-- TODO -->
+Product hunt,github, etc...
+
+<!-- TODO: sample public API -->
+<!-- TODO: register Giphy -->
+<!-- TODO: make calls with Giphy -->
+
 
 # Summary
 <!-- TODO -->

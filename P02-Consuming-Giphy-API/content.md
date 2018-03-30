@@ -88,8 +88,6 @@ Express has defined one route for us already at `/`, which is the root route of 
 
 >[action]
 >
-..
->
 ```Javascript
 const express = require('express');
 const router = express.Router();
@@ -217,5 +215,65 @@ If you see a broken image icon instead of a .gif, try refreshing the page–our 
 
 One last step before we finish our _MVP_, let's add some styling. We won't spend a lot of time making our app beautiful, but it's easy to make it look pretty good really fast. [Bootstrap](https://getbootstrap.com/) is a popular front end framework, and it's very easy to set up in three steps: First, we'll include Bootstrap in our project; Second, we'll add some Bootstrap classes to our HTML; Third, we'll add some custom CSS.
 
+>[action]
+>
+Start by opening the `views/layout.hbs`, and add the line indicated below:
+>
+```HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+>
+    <!-- Add the following 3 tags: -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+>
+  <!-- And add these classes to the body: -->
+  <body class="container-fluid text-center">
+    {{{body}}}
+  </body>
+</html>
+```
+>
+This will download CSS files from a Bootstrap server instead of our own server, which means we don't have to do anything else to set it up–we're ready to start using it.
+
+>[action]
+>
+Next, go back to `views/index.hbs`, and update your HTML to match the following:
+>
+```HTML
+<div class="row">
+  <div class="col-lg-1">
+    <h1>{{title}}</h1>
+  </div>
+</div>
+>
+<div class="row">
+  <div class="col-lg-1">
+    <img src="{{imgUrl}}" />
+  </div>
+</div>
+```
+
+>[action]
+>
+Finally, let's take care of some custom CSS. Open the file `public/stylesheets/style.css`. Delete everything inside, and add the following:
+>
+```CSS
+body {
+  padding: 2em;
+}
+```
+
+Now if you refresh `localhost:3000`, you should see something like the following:
+
+![MS Giphy Styled](assets/ms_giphy_styled.png)
+
+Congratulations, we completed our MVP! Our app fulfills a basic function–fetching a random gif from the Giphy API–and it doesn't do _anything_ else. Let's add a search feature.
 
 # Giphy Search
