@@ -289,7 +289,7 @@ We'll add our search feature in three steps.  First, we'll create a search form 
 Create a new file in your `views` folder called `search.hbs`. Add the following code:
 >
 ```HTML
-<form action="/search">
+<form action="/search" method="POST">
   <input type="text" name="giphy-query" placeholder="Search Giphy..." />
   <input type="submit" value="Search" />
 </form>
@@ -331,3 +331,60 @@ This action looks for a file called `'search'` in our `views/` folder–which we
 Let's try it out by going to `localhost:3000/search` in your browser. You should see something like this:
 
 ![Giphy Search Form](assets/giphy_search_form.png)
+
+## Giphy Search API
+
+Now let's handle the user's input. Take another look at the first line of `views/search.hbs`:
+
+```HTML
+<form action="/search" method="POST">
+```
+
+What happens when a user submits this form? The browser sends a POST request with all the form data to the URL specified in `action`–in this case, `/search`. Let's define an endpoint to handle POST requests to `/search`.
+
+>[action]
+>
+Open the `routes/index.js` file, and add the following router action:
+>
+```Javascript
+router.post('/search', (req, res, next) => {
+  console.log(req.body);
+  res.status(204).send({});
+});
+```
+>
+The body of the HTTP request (`req.body`) contains the contents of the user's form, and we want to print them to the server terminal to make sure it works. Then we return an empty object just to close the request-response cycle.
+
+In your browser, go to `localhost:3000/search`. Enter a search term, click the 'Search' button, and... hopefully nothing happens–That's what we expect. But look at the server logs in your terminal, and the second line from the bottom should be
+
+```
+{ 'giphy-query': 'YOUR SEARCH QUERY' }
+```
+
+That confirms that we can get the input from the user, but the trick here is relaying that search to the Giphy API. If you need a refresher on how the Giphy `/search` endpoint works, [you can check out the docs here](https://developers.giphy.com/docs/#operation--gifs-search-get).
+
+<!-- TODO: point out that we're sending a GET request, not POST, and add info box about the two ways to send params (POST body or URL query params). Also explain why param is called 'giphy-query' and where defined -->
+
+>[action]
+>
+In `routers/index.js`, update the `POST /search` action to the following:
+>
+```Javascript
+router.post('/search', (req, res, next) => {
+  const query = req.body['giphy-query']
+  const url = `http://api.giphy.com/v1/gifs/search?api_key=YOUR-API-KEY&q=${query}`;
+>
+  request.get(url, (err, response, body) => {
+    if(err) { console.error(err) }
+>
+    body = JSON.parse(body);
+    console.log(body);
+>
+    res.status(204).send({});
+  });
+});
+```
+>
+Unlike our request to `/random`, the URL we use to connect to the Giphy API will be different depending on the user's input. (Don't forget to replace `YOUR-API-KEY` in the URL above with your _real_ API key). In the first line we extract the user's query from the request body, and in the next we insert (or _interpolate_) it into the URL. But the rest is very similar to hitting the `/random` endpoint–we use `request` to connect to the Giphy API and we convert the response's body from JSON into a plain old Javascript object.
+
+We're not displaying any results to the user yet, but we should be able to see something interesting if we look at the server output. Once more, go to `localhost:3000/search` in your browser, enter a search term, and click "Search". Again, you shouldn't see anything happen here, but if you look at your terminal, you should see a rather large response from Giphy. If so, we're ready to move on to parsing that result and displaying the results to the user.
