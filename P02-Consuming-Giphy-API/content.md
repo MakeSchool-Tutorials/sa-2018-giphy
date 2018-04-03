@@ -277,3 +277,57 @@ Now if you refresh `localhost:3000`, you should see something like the following
 Congratulations, we completed our MVP! Our app fulfills a basic function–fetching a random gif from the Giphy API–and it doesn't do _anything_ else. Let's add a search feature.
 
 # Giphy Search
+
+So far, when a user visits our app, we make a call to Giphy's `/random` API endpoint and display the result to the user. It's very simple, but it isn't interactive at all (beyond letting the user refresh the page...). Our search feature will take input from the user–what kind of .gif do they want?–which means we have to get that input and handle it appropriately.
+
+We'll add our search feature in three steps.  First, we'll create a search form where the user can enter their input. Next, we'll set up the server to handle the input from that form–that includes accepting the user's input, and making a call to Giphy's `/search` API endpoint. Finally, we'll display the results to the user.
+
+## Giphy Search Form
+
+>[action]
+>
+Create a new file in your `views` folder called `search.hbs`. Add the following code:
+>
+```HTML
+<form action="/search">
+  <input type="text" name="giphy-query" placeholder="Search Giphy..." />
+  <input type="submit" value="Search" />
+</form>
+```
+
+In order to render that form, we need to set up an endpoint at `/search`.
+
+>[action]
+>
+Open the `routes/index.js` file and add a GET route for `/search`, as below:
+>
+```Javascript
+const express = require('express');
+const router = express.Router();
+const request = require('request');
+>
+router.get('/', (req, res, next) => {
+  const url = "http://api.giphy.com/v1/gifs/random?api_key=7eJ7JRkWzxL5X7b1BqsjkOr28hX3rgDe";
+  request.get(url, (err, response, body) => {
+    if(err) { console.error(err) }
+>
+    body = JSON.parse(body);
+    const imgUrl = body.data.source_image_url
+>
+    res.render('index', { title: 'Make School Giphy', imgUrl: imgUrl });
+  });
+});
+>
+// Add the following 3 lines:
+router.get('/search', (req, res, next) => {
+  res.render('search');
+})
+>
+module.exports = router;
+```
+>
+This action looks for a file called `'search'` in our `views/` folder–which we just created–and renders that file for the user.
+
+Let's try it out by going to `localhost:3000/search` in your browser. You should see something like this:
+
+![Giphy Search Form](assets/giphy_search_form.png)
