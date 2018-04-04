@@ -388,3 +388,53 @@ router.post('/search', (req, res, next) => {
 Unlike our request to `/random`, the URL we use to connect to the Giphy API will be different depending on the user's input. (Don't forget to replace `YOUR-API-KEY` in the URL above with your _real_ API key). In the first line we extract the user's query from the request body, and in the next we insert (or _interpolate_) it into the URL. But the rest is very similar to hitting the `/random` endpoint–we use `request` to connect to the Giphy API and we convert the response's body from JSON into a plain old Javascript object.
 
 We're not displaying any results to the user yet, but we should be able to see something interesting if we look at the server output. Once more, go to `localhost:3000/search` in your browser, enter a search term, and click "Search". Again, you shouldn't see anything happen here, but if you look at your terminal, you should see a rather large response from Giphy. If so, we're ready to move on to parsing that result and displaying the results to the user.
+
+## Display Search Results to User
+
+At this point the user has submitted their search query to us,  then we send it to Giphy and get some results. Now let's send those results back to the user.
+
+>[action]
+>
+We'll use the same file to display both the search form and the search results. Open the file `views/search.hbs`, and update it as below:
+>
+```HTML
+<form action="/search" method="POST">
+  <input type="text" name="giphy-query" placeholder="Search Giphy..." />
+  <input type="submit" value="Search" />
+</form>
+>
+<!-- Add the following three lines: -->
+{{#if searchResultUrl}}
+  <img src="{{searchResultUrl}}" />
+{{/if}}
+```
+
+We're using Handlebars–everything inside the double-braces (`{{...}}`)–to render a search result _only if_ we pass in a `searchResultUrl`. We need to define `searchResultUrl` (or not) based on the response from our call to the Giphy API `/search` endpoint.
+
+Giphy's search results include 10 .gifs, but to keep things simple we only want to return one. To make things a little _less_ simple, we'll select a random search result so that our users wil see a little variety if they submit the same search query.
+
+<!-- TODO: info box about #if and other Handlebars helpers -->
+
+>[action]
+>
+Go back to `routers/index.js` and update the `POST /search` action to the following:
+>
+```Javascript
+router.post('/search', (req, res, next) => {
+  const query = req.body['giphy-query']
+  const url = `http://api.giphy.com/v1/gifs/search?api_key=7eJ7JRkWzxL5X7b1BqsjkOr28hX3rgDe&q=${query}`;
+>
+  request.get(url, (err, response, body) => {
+    if(err) { console.error(err) }
+>
+    body = JSON.parse(body);
+>
+    // First, we select a random .gif from the Giphy results and get the URL
+    const randomResult = body.data[Math.floor(Math.random() * body.data.length)];
+    const searchResultUrl = randomResult.images.fixed_height.url;
+>
+    // Then we pass the URL to search.hbs
+    res.render('search', { searchResultUrl: searchResultUrl });
+  });
+});
+```
