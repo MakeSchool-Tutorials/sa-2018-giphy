@@ -233,9 +233,12 @@ Start by opening the `views/layout.hbs`, and add the line indicated below:
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
 >
-  <!-- And add these classes to the body: -->
   <body class="container-fluid text-center">
-    {{{body}}}
+>
+  <!-- Wrap the Handlebars output inside a <main> tag -->
+    <main class="container-fluid text-center">
+      {{{body}}}
+    </main>
   </body>
 </html>
 ```
@@ -248,24 +251,30 @@ Next, go back to `views/index.hbs`, and update your HTML to match the following:
 >
 ```HTML
 <div class="row">
-  <div class="col-lg-1">
+  <div class="col-xl">
     <h1>{{title}}</h1>
   </div>
 </div>
 >
 <div class="row">
-  <div class="col-lg-1">
+  <div class="col-xl">
     <img src="{{imgUrl}}" />
   </div>
 </div>
 ```
+>
+Adding these classes and laying out our divs this way lets us take advantage of Bootstrap.
 
 >[action]
 >
 Finally, let's take care of some custom CSS. Open the file `public/stylesheets/style.css`. Delete everything inside, and add the following:
 >
 ```CSS
-body {
+body, html {
+  padding: 0;
+}
+>
+main {
   padding: 2em;
 }
 ```
@@ -438,3 +447,143 @@ router.post('/search', (req, res, next) => {
   });
 });
 ```
+
+Now let's go to `localhost:3000/search`, enter any search time you want, and click 'Search'. You should see a result similar to this:
+
+![Search Results](assets/searchresult.png)
+
+# Add Some Styling
+
+Before we finish, we really should polish up the look a little bit. When we built the MVP, we added Bootstrap to get some _basic_ styling, so let's take advantage of it. We'll make a few changes to the layout: First, we'll add a _navbar_ at the top of the page. Then, we'll move our search form into the navbar, so that users can search from anywhere. Finally, we'll add a border around our search result to add emphasis.
+
+## Add a Navbar
+
+A _navbar_ (or, _navigation bar_) is common to many sites. It lives at the top of webpage and usually has the website's logo and some links to get around the site. Bootstrap has a ton of options for styling your navbar–making it responsive, adding interactive elements, etc... ([see the docs here](https://getbootstrap.com/docs/4.0/components/navbar/))–but we just want a simple dark grey bar across the top of the page.
+
+>[action]
+>
+Open `views/layout.hbs`, and update it as below:
+>
+```HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+>
+  <body>
+>
+    <!-- Add this <nav> element -->
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="/search">Make School Giphy Search</a>
+    </nav>
+>
+    <main class="container-fluid text-center">
+      {{{body}}}
+    </main>
+  </body>
+</html>
+```
+
+## Move Search to Navbar
+
+Instead of keeping our search bar in the main part of our page, let's move it up to the navbar so that it is available everywhere. Remember that the contents of `views/layout.hbs` is loaded with every page on our site, so anything we keep there will always be visible to the user.
+
+>[action]
+>
+Go back to `views/layout.hbs` and add the form to the navbar, as below:
+>>
+```HTML
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a class="navbar-brand" href="/search">Make School Giphy Search</a>
+>
+      <!-- Add this form to the navbar -->
+      <form class= "form-inline my-2 my-lg-0" action="/search" method="POST">
+        <input type="text" name="giphy-query" placeholder="Search Giphy..." />
+        <input type="submit" value="Search" />
+      </form>
+>
+    </nav>
+    <main class="container-fluid text-center">
+      {{{body}}}
+    </main>
+  </body>
+</html>
+```
+
+>[action]
+>
+Then open `views/search.hbs` and remove the form from that file:
+>
+```HTML
+<!-- Remove form from here -->
+<!-- <div class="row">
+  <div class="col-xl">
+    <form action="/search" method="POST">
+      <input type="text" name="giphy-query" placeholder="Search Giphy..." />
+      <input type="submit" value="Search" />
+    </form>
+  </div>
+</div> -->
+>
+<!-- And wrap our search result in a bunch of <div> tags: -->
+{{#if searchResultUrl}}
+  <div class="row">
+    <div class="col-xl">
+      <div id="search-result">
+        <img src="{{searchResultUrl}}" />
+      </div>
+    </div>
+  </div>
+{{/if}}
+```
+
+## Style the Search Result
+
+Finally, we need to add a little custom CSS to get the search results to look a little more polished.
+
+>[action]
+>
+Open `public/stylesheets/style.css` and add the following custom CSS:
+>
+```CSS
+body, html {
+  padding: 0;
+}
+>
+main {
+  padding: 2em;
+}
+>
+#search-result {
+  background-color: #ccc;
+  padding: 1em;
+  border-radius: 5px;
+  max-width: 20em;
+  margin: 0;
+  display: inline-block;
+}
+```
+
+Now when you refresh and perform a search, you should see something like this:
+
+![Styled Search Result](assets/styled_search_result.png)
+
+# Summary
+
+<!-- TODO -->
