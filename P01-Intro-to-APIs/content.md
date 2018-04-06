@@ -114,8 +114,13 @@ Now, how can we actually use this data?
 
 # Postman
 
-<!-- TODO: introduction -->
-<!-- TODO: install -->
+Before we start writing code to access APIs, lets get more familiar with making HTTP requests and reading the JSON responses. We'll use  (Postman)[https://www.getpostman.com/], which is a tool that makes it easy to experiment with APIs.
+
+>[action]
+>
+[Postman Splash Page](assets/postman_landing.png)
+>
+Go to [https://www.getpostman.com/] and click on "Download the App", then follow the directions to install it in your `Applications` folder. If you get an error message about opening apps from unidentified developers, you may need to open System Preferences and go to Security & Privacy to set permissions. It will ask you to create an account, but this isn't necessary–just click "Skip for now".
 
 # Some public APIs
 
