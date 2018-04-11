@@ -114,18 +114,31 @@ Now, how can we actually use this data?
 
 # Postman
 
-Before we start writing code to access APIs, lets get more familiar with making HTTP requests and reading the JSON responses. We'll use  (Postman)[https://www.getpostman.com/], which is a tool that makes it easy to experiment with APIs.
+Before we start writing code to access APIs, lets get more familiar with making HTTP requests and reading the JSON responses. We'll use  (Postman)[https://www.getpostman.com/], a tool that provides a graphic interface to work with APIs. It's possible to do everything in the terminal, but Postman makes it much more convenient.
 
 >[action]
 >
-[Postman Splash Page](assets/postman_landing.png)
+![Postman Splash Page](assets/postman_landing.png)
 >
-Go to [https://www.getpostman.com/] and click on "Download the App", then follow the directions to install it in your `Applications` folder. If you get an error message about opening apps from unidentified developers, you may need to open System Preferences and go to Security & Privacy to set permissions. It will ask you to create an account, but this isn't necessary–just click "Skip for now".
+Go to [https://www.getpostman.com/] and click on "Download the App", then follow the directions to install it in your `Applications` folder. If you get an error message about opening apps from unidentified developers, you may need to open System Preferences and go to Security & Privacy to set permissions. It will ask you to create an account, but this isn't necessary–you can just click "Skip for now".
 
 # Some public APIs
 
-<!-- TODO -->
-Product hunt,github, etc...
+Let's start by making the simplest API call possible–a GET request with no options. The JSON example above, from `http://api.randomuser.me/`, is perfect.
+
+>[action]
+>
+In Postman, set the button on the left to "GET", enter `http://api.randomuser.me/` in the address bar, and click "Send".
+>
+![Postman randomuser.me](assets/postman_random_user.png)
+>
+Take a moment to read through the response–it's the same as the one we discussed above.
+
+<!-- TODO: one more easy example -->
+
+`http://api.randomuser.me/` is great because it's _so_ easy to use, but as you use more powerful and complex APIs, you'll have to start adding options to your calls. One of the most common steps you'll have to take is _authentication_. There are a ton of different ways to authenticate an API call and there's no hope of covering them all in one lesson. In the end, every API is different and you'll have to read the documentation when you first use an API.
+
+The purpose of this tutorial is to work
 
 <!-- TODO: sample public API -->
 <!-- TODO: register Giphy -->
