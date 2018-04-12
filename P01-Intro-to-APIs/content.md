@@ -132,17 +132,40 @@ In Postman, set the button on the left to "GET", enter `http://api.randomuser.me
 >
 ![Postman randomuser.me](assets/postman_random_user.png)
 >
-Take a moment to read through the response–it's the same as the one we discussed above.
+Take a moment to read through the response–it's the same as the example JSON object above.
 
 <!-- TODO: one more easy example -->
-
-`http://api.randomuser.me/` is great because it's _so_ easy to use, but as you use more powerful and complex APIs, you'll have to start adding options to your calls. One of the most common steps you'll have to take is _authentication_. There are a ton of different ways to authenticate an API call and there's no hope of covering them all in one lesson. In the end, every API is different and you'll have to read the documentation when you first use an API.
-
-The purpose of this tutorial is to work
-
 <!-- TODO: sample public API -->
-<!-- TODO: register Giphy -->
-<!-- TODO: make calls with Giphy -->
+
+`http://api.randomuser.me/` is great because it's _so_ easy to use, but as you use more powerful and complex APIs you'll have to start adding options and configuration. One of the most common steps you'll have to take is _authentication_, or providing account information. There are a ton of different ways to authenticate an API call, and there's no hope of covering them all in one lesson. Our goal in this tutorial is to consume the Giphy API, and it authenticates using an _API key_, which happens to be a very common and simple authentication scheme. This makes it a great place to start.
+
+>[action]
+>
+If you don't have a Giphy account, you can create one for free at (https://giphy.com/join).
+>
+![Giphy Join Page](assets/giphy_join.png)
+
+>[action]
+>
+After you've signed up/logged in, go to your dashboard at (https://developers.giphy.com/dashboard/).
+>
+![Giphy Dashboard](assets/giphy_dashboard.png)
+>
+And click on "Create an App".
+>
+![New Giphy App](assets/giphy_new_app.png)
+>
+Fill in the fields to give your app a name and description, as above, and click "Create New App".
+>
+![Giphy Dashboard with API Key](assets/giphy_dashboard_key.png)
+>
+And then copy that API Key–we'll need it to make calls to the Giphy API.
+
+## Make Calls to the Giphy API
+
+With our API Key in hand, we're ready to try out Giphy's API. You can skim through the documentation at (https://developers.giphy.com/docs/)–we'll start with the simplest endpoint, which takes no options and returns a single random GIF.
+
+>
 
 
 # Summary
