@@ -3,23 +3,23 @@ title: "Introduction to APIs"
 slug: intro-api
 ---
 
-<!-- TODO: Introduction -->
+In this section, we will:
+
+- Learn what an API is and why we would want to use one
+- Learn about JSON
+- Access APIs using Postman
 
 # What is an API?
 
-<!-- If you want your app to connect to servers owned by other people, then you are going to have to deal with *APIs* (Application Program Interfaces). An API just means a standard way for some piece of software to talk to another piece of software. In this case, a way for your app to talk to some server somewhere. For example, you may use an [API for getting weather information](http://openweathermap.org/api), an [API for detecting faces](http://www.faceplusplus.com/api-overview/) or one of [thousands of others](https://market.mashape.com/explore?sort=developers). -->
-
-- Many kinds of APIs, but here we're learning specifically about APIs that are publicly accessible with HTTP and JSON
-- APIs are how you fetch information from external sources
-  - Two typical sources:
-  - back end server
-  - other services' APIs
+If you want your app to connect to servers owned by other people, then you are going to have to deal with *APIs* (Application Program Interfaces). In general, an API is just a standard way for some piece of software to talk to another piece of software. But in web development, _API_ usually refers to a server connected to the internet that returns raw data instead of nicely formatted HTML pages. For example, you may use an [API for getting weather information](http://openweathermap.org/api), an [API for detecting faces](http://www.faceplusplus.com/api-overview/) or one of [thousands of others](https://market.mashape.com/explore?sort=developers).
 
 # JSON
 
-JSON–_*J*ava*s*cript *O*bject *N*otation_–is an extremely common format for web APIs. Remember that a Javascript object, denoted by `{ }`, is a collection of key-value pairs, for example `{ name: 'Joe', age: 23 }`. JSON is a way of representing a Javascript object as simple text–this is useful because it's really easy to send text over the internet. So in JSON, `{ name: 'Joe', age: 23 }` becomes `'{"name":"Joe","age":23}'`.
+JSON–_Javascript Object Notation_–is an extremely common format for web APIs. Remember that a Javascript object, denoted by `{ }`, is a collection of key-value pairs, for example `{ name: 'Joe', age: 23 }`. JSON is a way of representing a Javascript object as simple text–this is useful because it's really easy to send text over the internet. So in JSON, `{ name: 'Joe', age: 23 }` becomes `'{"name":"Joe","age":23}'`.
 
-It's important to understand that a JSON string is not _exactly_ the same as a Javascript object–Javascript objects are much more powerful, and can contain functions and complex data types. The strength of JSON is its simplicity: the only data types allowed are `String`s and `Number`s.  Nested `Object`s and `Array`s are also allowed, but they too can only contain `String`s and `Number`s. Recall that an `Array`, denoted with `[ ]`, is a simple collection of items. Here's an array of animals: `["dog", "cat", "horse", "caterpillar"]`. Here's an array of numbers: `[42, 2001, 1984, 867.5309, 3.14]`.
+It's important to understand that a JSON string is not _exactly_ the same as a Javascript object–Javascript objects are much more powerful, and can contain functions and complex data types. The strength of JSON is its simplicity: the only data types allowed are `String`s and `Number`s.  Nested `Object`s and `Array`s are also allowed, but they too can only contain `String`s and `Number`s.
+
+Recall that an `Array`, denoted with `[ ]`, is a simple collection of items. Here's an array of animals: `["dog", "cat", "horse", "caterpillar"]`. Here's an array of numbers: `[42, 2001, 1984, 867.5309, 3.14]`.
 
 JSON is built into Javascript, so it's really easy to work with. If you have a Javascript `Object` or `Array` and you want a JSON-formatted `String`, call `JSON.stringify()`. For example:
 
@@ -134,9 +134,6 @@ In Postman, set the button on the left to "GET", enter `http://api.randomuser.me
 >
 Take a moment to read through the response–it's the same as the example JSON object above.
 
-<!-- TODO: one more easy example -->
-<!-- TODO: sample public API -->
-
 `http://api.randomuser.me/` is great because it's _so_ easy to use, but as you use more powerful and complex APIs you'll have to start adding options and configuration. One of the most common steps you'll have to take is _authentication_, or providing account information. There are a ton of different ways to authenticate an API call, and there's no hope of covering them all in one lesson. Our goal in this tutorial is to consume the Giphy API, and it authenticates using an _API key_, which happens to be a very common and simple authentication scheme. This makes it a great place to start.
 
 >[action]
@@ -165,8 +162,19 @@ And then copy that API Key–we'll need it to make calls to the Giphy API.
 
 With our API Key in hand, we're ready to try out Giphy's API. You can skim through the documentation at (https://developers.giphy.com/docs/)–we'll start with the simplest endpoint, which takes no options and returns a single random GIF.
 
+>[action]
 >
+Open Postman. Enter `https://developers.giphy.com/docs/` into the URL field, and make sure the button to the left is set to 'GET'.
+>
+![Postman Giphy Error](assets/postman_giphy_error.png)
+>
+Click `GET` and you should see something like the above–we have our API Key, but we need to send it with our GET request.
+>
+In the URL field, add `?api_key=` to the end of the URL, followed by your Giphy API key, as below:
+>
+![Postman Giphy](assets/postman_giphy.png)
 
 
 # Summary
-<!-- TODO -->
+
+In this section, we learned how to access APIs using Postman, which is a popular development tool. In the next section, we'll start building an application that can access an API for us. 
