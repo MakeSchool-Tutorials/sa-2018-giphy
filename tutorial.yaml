@@ -1,7 +1,5 @@
-title: "Tutorial Template Title, max 56 characters"
+title: "Build a Giphy API Wrapper"
 cover: cover.png
-solution_url: https://github.com/MakeSchool-Tutorials/Tutorial-Template/
+# solution_url: https://github.com/MakeSchool-Tutorials/Tutorial-Template/
 teaser_text: |
-    Tell the user what they will learn!
-    This can be multi-line text.
-    150 characters max!
+    Learn how to interact with 3rd party APIs using Node.
