@@ -117,7 +117,7 @@ First, we are requiring Request and assigning it to the variable `request`–now
 >
 Next, we save the Giphy API Random Endpoint URL as a variable–this isn't totally necessary, but it makes it look a little nicer on the next line when we have to pass it in to `.get()` as an argument. Also, be sure to replace `YOUR-API-KEY` with _your API key_–otherwise you'll just get `422` errors instead of gifs.
 >
-Finally, we parse the `body` to convert it from a JSON string to a Javascript object, and log that to the console. (Here, `console.log()` will print messages in your terminal because this code runs on the server; if you run `console.log()` from inside a browser, it will print to your browser console.)
+Finally, we parse the `body` to convert it from a JSON string to a Javascript object, and log that to the console. (Here, `console.log()` will print messages in your terminal because this code runs on the server; if you run `console.log()` from inside a browser, it will print to your browser console).
 
 Let's try it out: in your terminal, make sure you're in your `ms-giphy` folder and type:
 

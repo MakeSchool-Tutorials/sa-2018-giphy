@@ -11,7 +11,7 @@ In this section we will:
 
 # Giphy Search
 
-So far, when a user visits our app, we make a call to Giphy's `/random` API endpoint and display the result to the user. It's very simple, but it isn't interactive at all (beyond letting the user refresh the page...). Our search feature will take input from the user–what kind of .gif do they want?–which means we have to get that input and handle it appropriately.
+So far, when a user visits our app, we make a call to Giphy's `/random` API endpoint and display the result to the user. It's very simple, but it isn't interactive at all (beyond letting the user refresh the page....) Our search feature will take input from the user–what kind of .gif do they want?–which means we have to get that input and handle it appropriately.
 
 We'll add our search feature in three steps.  First, we'll create a search form where the user can enter their input. Next, we'll set up the server to handle the input from that form–that includes accepting the user's input, and making a call to Giphy's `/search` API endpoint. Finally, we'll display the results to the user.
 
