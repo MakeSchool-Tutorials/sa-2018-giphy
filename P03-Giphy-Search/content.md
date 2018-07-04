@@ -124,7 +124,7 @@ We're not displaying any results to the user yet, but we should be able to see s
 
 ## Display Search Results to User
 
-At this point the user has submitted their search query to us,  then we send it to Giphy and get some results. Now let's send those results back to the user.
+At this point the user has submitted their search query to us, then we send it to Giphy and get some results. Now let's send those results back to the user.
 
 >[action]
 >
@@ -144,7 +144,7 @@ We'll use the same file to display both the search form and the search results. 
 
 We're using Handlebars–everything inside the double-braces (`{{...}}`)–to render a search result _only if_ we pass in a `searchResultUrl`. We need to define `searchResultUrl` (or not) based on the response from our call to the Giphy API `/search` endpoint.
 
-Giphy's search results include 10 .gifs, but to keep things simple we only want to return one. To make things a little _less_ simple, we'll select a random search result so that our users wil see a little variety if they submit the same search query.
+Giphy's search results include 10 .gifs, but to keep things simple we only want to return one. To make things a little _less_ simple, we'll select a random search result so that our users will see a little variety if they submit the same search query.
 
 <!-- TODO: info box about #if and other Handlebars helpers -->
 
