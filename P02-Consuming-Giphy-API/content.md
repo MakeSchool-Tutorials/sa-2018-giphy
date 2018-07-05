@@ -175,6 +175,8 @@ Update `views/index.hbs` to look like the following:
 >
 Here, we're adding an `img` tag onto the page, but instead of a URL we have Handlebars tag that renders a variable `imgUrl`. Just like our `title` variable, we need to give it a value in `routes/index.js`.
 
+<!--  -->
+
 >[action]
 >
 Open `routes/index.js`, and update the `res.render()` line to include a value for `imgUrl`:
