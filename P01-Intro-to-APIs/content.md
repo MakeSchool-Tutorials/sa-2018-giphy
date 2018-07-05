@@ -164,7 +164,7 @@ With our API Key in hand, we're ready to try out Giphy's API. You can skim throu
 
 >[action]
 >
-Open Postman. Enter `https://developers.giphy.com/docs/` into the URL field, and make sure the button to the left is set to 'GET'.
+Open Postman. Enter `https://api.giphy.com/v1/gifs/random` into the URL field, and make sure the button to the left is set to 'GET'.
 >
 ![Postman Giphy Error](assets/postman_giphy_error.png)
 >
@@ -177,4 +177,4 @@ In the URL field, add `?api_key=` to the end of the URL, followed by your Giphy 
 
 # Summary
 
-In this section, we learned how to access APIs using Postman, which is a popular development tool. In the next section, we'll start building an application that can access an API for us. 
+In this section, we learned how to access APIs using Postman, which is a popular development tool. In the next section, we'll start building an application that can access an API for us.
