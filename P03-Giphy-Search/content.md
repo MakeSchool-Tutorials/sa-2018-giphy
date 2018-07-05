@@ -220,7 +220,7 @@ Instead of keeping our search bar in the main part of our page, let's move it up
 >[action]
 >
 Go back to `views/layout.hbs` and add the form to the navbar, as below:
->>
+>
 ```HTML
 <!DOCTYPE html>
 <html>
