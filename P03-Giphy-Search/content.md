@@ -1,5 +1,5 @@
 ---
-title: "Consuming the Giphy APIs"
+title: "Giphy Search"
 slug: giphy-search
 ---
 
@@ -9,7 +9,7 @@ In this section we will:
 - Send query data with a POST request
 - Use Bootstrap to style our app
 
-# Giphy Search
+## Giphy Search
 
 So far, when a user visits our app, we make a call to Giphy's `/random` API endpoint and display the result to the user. It's very simple, but it isn't interactive at all (beyond letting the user refresh the page....) Our search feature will take input from the user–what kind of .gif do they want?–which means we have to get that input and handle it appropriately.
 

@@ -5,7 +5,7 @@ slug: consuming-giphy-api
 
 <!-- TODO:Introduction -->
 
-# Setting Up Our Environment
+## Setting Up Our Environment
 
 <!-- TODO: consider creating a starter repo, and having students pull that down instead of going through following steps -->
 
@@ -284,8 +284,3 @@ Now if you refresh `localhost:3000`, you should see something like the following
 ![MS Giphy Styled](assets/ms_giphy_styled.png)
 
 Congratulations, we completed our MVP! Our app fulfills a basic function–fetching a random gif from the Giphy API–and it doesn't do _anything_ else. Let's add a search feature.
-
-
-# Summary
-
-<!-- TODO -->

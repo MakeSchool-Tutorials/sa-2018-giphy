@@ -142,6 +142,8 @@ If you don't have a Giphy account, you can create one for free at (https://giphy
 >
 ![Giphy Join Page](assets/giphy_join.png)
 
+<!--  -->
+
 >[action]
 >
 After you've signed up/logged in, go to your dashboard at (https://developers.giphy.com/dashboard/).
