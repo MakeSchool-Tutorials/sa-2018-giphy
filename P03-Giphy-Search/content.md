@@ -250,6 +250,8 @@ Go back to `views/layout.hbs` and add the form to the navbar, as below:
 </html>
 ```
 
+<!--  -->
+
 >[action]
 >
 Then open `views/search.hbs` and remove the form from that file:
