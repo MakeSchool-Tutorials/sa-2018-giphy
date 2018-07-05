@@ -3,13 +3,13 @@ title: "Giphy API Introduction"
 slug: giphy-api-introduction
 ---
 
-# What we're building
+## What we're building
 
 ![Make School Giphy](assets/ms-giphy.png)
 
 [Giphy](https://giphy.com/) is a service that provides .gifs on demand. In this tutorial, we're building a simple search engine for their collection.
 
-# What you'll learn
+## What you'll learn
 
 In this tutorial we will cover:
 
@@ -18,7 +18,7 @@ In this tutorial we will cover:
 - Introduction to Postman
 - Building a web application using Node.js and Bootstrap
 
-# If you get stuck
+## If you get stuck
 
 "Sometimes, magic is just someone spending more time on something than anyone else might reasonably expect." - Teller (Penn & Teller)
 
