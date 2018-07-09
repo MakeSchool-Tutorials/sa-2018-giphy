@@ -195,7 +195,7 @@ router.get('/', function(req, res, next) {
     body = JSON.parse(body);
 >
     // Add this line to get the .gif's URL from the Giphy response body:
-    const imgUrl = body.data.image_url
+    const imgUrl = body.data.image_original_url
 >
     // And pass it to our view as imgUrl:
     res.render('index', { title: 'Make School Giphy', imgUrl: imgUrl });

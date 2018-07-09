@@ -40,12 +40,12 @@ const router = express.Router();
 const request = require('request');
 >
 router.get('/', (req, res, next) => {
-  const url = "http://api.giphy.com/v1/gifs/random?api_key=7eJ7JRkWzxL5X7b1BqsjkOr28hX3rgDe";
+  const url = "http://api.giphy.com/v1/gifs/random?api_key=YOUR-API-KEY";
   request.get(url, (err, response, body) => {
     if(err) { console.error(err) }
 >
     body = JSON.parse(body);
-    const imgUrl = body.data.source_image_url
+    const imgUrl = body.data.image_original_url
 >
     res.render('index', { title: 'Make School Giphy', imgUrl: imgUrl });
   });
@@ -155,7 +155,7 @@ Go back to `routers/index.js` and update the `POST /search` action to the follow
 ```Javascript
 router.post('/search', (req, res, next) => {
   const query = req.body['giphy-query']
-  const url = `http://api.giphy.com/v1/gifs/search?api_key=7eJ7JRkWzxL5X7b1BqsjkOr28hX3rgDe&q=${query}`;
+  const url = `http://api.giphy.com/v1/gifs/search?api_key=YOUR-API-KEY&q=${query}`;
 >
   request.get(url, (err, response, body) => {
     if(err) { console.error(err) }
